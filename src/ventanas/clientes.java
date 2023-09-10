@@ -4,24 +4,38 @@
  */
 package ventanas;
 
+import java.beans.Statement;
+import java.sql.PreparedStatement;
 import variables.Var;
 import javax.swing.table.DefaultTableModel;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableColumnModel;
 
 /*include Var;*/
-
 /**
  *
  * @author migue
  */
 public class clientes extends javax.swing.JInternalFrame {
-public Var var;
+
+    public Var var;
+
     /**
      * Creates new form clientes
+     *
      * @param v
      */
     public clientes(Var v) {
         initComponents();
-        var=v;
+        var = v;
         inicia_todo();
     }
 
@@ -60,8 +74,8 @@ public Var var;
         jLabel10 = new javax.swing.JLabel();
         jCheckBox1 = new javax.swing.JCheckBox();
         jComboBox1 = new javax.swing.JComboBox<>();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
         jTextField8 = new javax.swing.JTextField();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
 
@@ -138,8 +152,6 @@ public Var var;
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jFormattedTextField1.setText("jFormattedTextField1");
-
         jTextField8.setText("jTextField8");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -186,9 +198,9 @@ public Var var;
                         .addGap(33, 33, 33)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jFormattedTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
-                            .addComponent(jTextField8))))
-                .addContainerGap(380, Short.MAX_VALUE))
+                            .addComponent(jTextField8, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
+                            .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(405, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -198,13 +210,17 @@ public Var var;
                     .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8)
                     .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(9, 9, 9)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9)
-                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -227,7 +243,7 @@ public Var var;
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(10, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jButton4.setText("Guardar");
@@ -297,9 +313,8 @@ public Var var;
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-    
-    
-    
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -315,7 +330,7 @@ public Var var;
     private javax.swing.JButton jButton5;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -342,20 +357,82 @@ public Var var;
 
     private void inicia_todo() {
 //        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    String x[][]={};
-    String columns[]= {"DNI","NOMRE 1","APELLIDO PAT","APELLIDO MAT","CONVENIO","CONVENIO"};
-    DefaultTableModel model = new DefaultTableModel(x,columns);
-    jTable1.setModel(model);
-    jTextField5.setText("");
-    jTextField1.setText("");
-    jTextField2.setText("");
-    jTextField3.setText("");
-    jTextField4.setText("");
-    jTextField5.setText("");
-    jTextField6.setText("");
-    jTextField7.setText("");
-    jTextField8.setText("");
-    
-    
+        String x[][] = {};
+        String colu[] = {"DNI", "NOMRE 1", "APELLIDO PAT", "APELLIDO MAT", "CONVENIO", "CONVENIO"};
+        DefaultTableModel model;
+        model = (DefaultTableModel) jTable1.getModel();
+        model.setColumnIdentifiers(colu);
+
+        DefaultTableCellRenderer tcr;
+        TableColumnModel columnModel = jTable1.getColumnModel();
+        columnModel.getColumn(0).setPreferredWidth(220);
+        columnModel.getColumn(1).setPreferredWidth(250);
+        columnModel.getColumn(2).setPreferredWidth(75);
+        columnModel.getColumn(3).setPreferredWidth(75);
+        columnModel.getColumn(4).setPreferredWidth(75);
+        columnModel.getColumn(5).setPreferredWidth(75);
+//        columnModel.getColumn(6).setPreferredWidth(75);
+        tcr = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(SwingConstants.RIGHT); //CENTER o LEFT
+        jTable1.getColumnModel().getColumn(3).setCellRenderer(tcr);
+        jTable1.getColumnModel().getColumn(4).setCellRenderer(tcr);
+        jTable1.getColumnModel().getColumn(5).setCellRenderer(tcr);
+//        jTable1.getColumnModel().getColumn(6).setCellRenderer(tcr);
+//        jTable1.setModel(model);
+
+        jTable1.setModel(model);
+        carga_tabla();
+        jTextField5.setText("");
+        jTextField1.setText("");
+        jTextField2.setText("");
+        jTextField3.setText("");
+        jTextField4.setText("");
+        jTextField5.setText("");
+        jTextField6.setText("");
+        jTextField7.setText("");
+        jTextField8.setText("");
+        carga_tabla();
+
+    }
+
+     private void carga_tabla() {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        var.borratabla(modelo);
+//        String selecion=jComboBox1.getSelectedItem().toString();
+        //select * from creditos where dia_de_operacion ='2020-10-08' and CPROVEEDOR='00000018 MOLITALIA S.A.' and MONTH(dfecha_documento)='10' and year(dfecha_documento)='2020'
+//        int mesnum=jMonthChooser1.getMonth()+1;
+//        int añonum=jYearChooser1.getValue();
+        String sql="select CID_VEND,cid_clie,dfecha_documento,creditos.cnumero,nimporte_neto,nmonto, EXTENCION.RESPONSABLE, EXTENCION.COMENTARIO ";
+//                + "from creditos Left Outer Join EXTENCION "
+//                + "using (CNUMERO) "
+//                + "where dia_de_operacion='"+v.carga_ultima_fecha_Texto()+"'"
+//                + "order by dfecha_documento,cid_clie";
+        Object[] fila = new Object[6]; // Hay tres columnas en la tabla6
+//        DecimalFormat formatea = v.MyFormatter();
+        SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd/MM/aaaa");
+        try {
+            PreparedStatement ps = var.conectar().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                fila[0] = rs.getNString("dni");
+                fila[1] = rs.getNString("apellido_p");
+                fila[2] = rs.getNString("apellido_m");
+                fila[3] = rs.getNString("convenio");
+//                fila[4] = rs.getNString("nimporte_neto");
+//                fila[5] = formatea.format(rs.getDouble("nmonto"));
+//                fila[5] = rs.getNString("EXTENCION.RESPONSABLE");
+//                fila[7] = rs.getNString("EXTENCION.COMENTARIO");
+                
+                
+                modelo.addRow(fila);
+            }
+            jTable1.setModel(modelo);
+            
+            
+            
+        } catch (SQLException ex) {
+//            Logger.getLogger(Creditosxmes.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

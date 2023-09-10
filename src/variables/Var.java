@@ -10,6 +10,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -20,7 +21,7 @@ public class Var {
     private String CreaTablaSistema;
     private String sSistemaOperativo;
     private String CaminoCompletoBD;
-    private boolean conectado;
+    private boolean conectado=false;
     private String usuario;
     private Boolean UsuarioValido;
     
@@ -44,6 +45,7 @@ public class Var {
             Class.forName("org.h2.Driver");
             coco = DriverManager.getConnection("jdbc:h2:file:" + sPath, "Miguel", "31651918");
             conectado=!coco.isClosed();
+            con=coco;
 
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(Var.class.getName()).log(Level.SEVERE, null, ex);
@@ -91,6 +93,34 @@ public class Var {
         this.UsuarioValido = UsuarioValido;
     }
 
+    public Connection getCon() {
+        return con;
+    }
+
+    public void setCon(Connection con) {
+        this.con = con;
+    }
+
+    public String getCreaTablaSistema() {
+        return CreaTablaSistema;
+    }
+
+    public void setCreaTablaSistema(String CreaTablaSistema) {
+        this.CreaTablaSistema = CreaTablaSistema;
+    }
+
     
     
-}
+
+
+    public void borratabla(DefaultTableModel modelo) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        int a = modelo.getRowCount() - 1;
+        for (int i = a; i >= 0; i--) {
+            modelo.removeRow(i);
+        }
+
+    }
+    
+  }

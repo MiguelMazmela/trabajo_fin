@@ -1,0 +1,98 @@
+create table clientes(
+dni varchar(8) primary key not null,
+fecha_emision DATE,
+caracter_verificador varchar(1),
+fecha_nac DATE,
+nombre_1 varchar(30),
+nombre_2 varchar(30),
+apellido_p varchar(30),
+apellido_m varchar(30),
+domicilio TEXT,
+codofin varchar(9),
+clave varchar(8),
+fecha_reg DATE,
+convenio varchar(30),
+cuenta_sueldo boolean
+);
+
+create table conbenio(
+nombre varchar(30),
+ruc varchar(11),
+tasa real,
+cuenta_sueldo boolean,
+tasa_cs real,
+tasa1 real,
+tasa2 real,
+tasa3 real,
+tasa4 real,
+activo boolean
+);
+
+create table prestamo(
+dni varchar(8),
+convenio varchar(30),
+tasa real,
+monto_neto real,
+cuenta_sueldo boolean,
+monto_prestamo real,
+color int,
+compra_deuda boolean,
+monto_compra real,
+producto varchar(10),
+codigo_sup_jef_vent varchar(8),
+cod_promotor varchar(8),
+canal int,
+palso int,
+email varchar(100),
+tipo_seguro int
+);
+
+create table producto(
+nombre varchar(10),
+notas text
+);
+
+create table personal(
+dni varchar(8),
+nombre_1 varchar(30),
+nombre_2 varchar(30),
+apellido_p varchar(30),
+apellido_m varchar(30),
+domicilio TEXT,
+cargo int,
+jefe varchar(8),
+notas text
+);
+
+create table canal(
+codigo int primary key not null,
+nombre varchar(50),
+descripcion text
+);
+
+create table seguro(
+codigo int primary key not null,
+nombre varchar(50),
+descripcion text
+);
+
+INSERT INTO producto VALUES(1, 'DXP','D POR P');
+
+create table clientes(
+dni varchar(8) primary key not null,
+fecha_emision DATE,
+caracter_verificador varchar(1),
+fecha_nac DATE,
+nombre_1 varchar(30),
+nombre_2 varchar(30),
+apellido_p varchar(30),
+apellido_m varchar(30),
+domicilio TEXT,
+codofin varchar(9),
+clave varchar(8),
+fecha_reg DATE,
+convenio varchar(30),
+cuenta_sueldo boolean
+);
+INSERT INTO clientes VALUES('32024854',NULL,'',NULL,'PEDRO','EUGENIO','QUITO','PASCUAL','','','',NULL,'',FALSE);
+SELECT * from clientes
