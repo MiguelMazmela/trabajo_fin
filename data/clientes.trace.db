@@ -1,0 +1,252 @@
+2023-09-08 16:46:34.940217-05:00 database: wrong user or password; user: "MIGUEL"
+org.h2.message.DbException: Nombre de usuario ó password incorrecto
+Wrong user name or password [28000-222]
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.message.DbException.get(DbException.java:188)
+	at org.h2.engine.Engine.openSession(Engine.java:154)
+	at org.h2.engine.Engine.openSession(Engine.java:222)
+	at org.h2.engine.Engine.createSession(Engine.java:201)
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:343)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:125)
+	at org.h2.util.JdbcUtils.getConnection(JdbcUtils.java:288)
+	at org.h2.server.web.WebServer.getConnection(WebServer.java:811)
+	at org.h2.server.web.WebApp.login(WebApp.java:1039)
+	at org.h2.server.web.WebApp.process(WebApp.java:227)
+	at org.h2.server.web.WebApp.processRequest(WebApp.java:177)
+	at org.h2.server.web.WebThread.process(WebThread.java:154)
+	at org.h2.server.web.WebThread.run(WebThread.java:103)
+	at java.base/java.lang.Thread.run(Thread.java:1623)
+Caused by: org.h2.jdbc.JdbcSQLInvalidAuthorizationSpecException: Nombre de usuario ó password incorrecto
+Wrong user name or password [28000-222]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:522)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	... 16 more
+2023-09-08 16:46:59.646665-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: Tipo de dato desconocido : "SMALLMONEY"
+Unknown data type: "SMALLMONEY"; SQL statement:
+create table conbenio(
+nombre varchar(30),
+ruc varchar(11),
+tasa SMALLMONEY,
+cuenta_sueldo boolean,
+tasa_cs SMALLMONEY,
+tasa1 SMALLMONEY,
+tasa2 SMALLMONEY,
+tasa3 SMALLMONEY,
+tasa4 SMALLMONEY,
+activo boolean
+) [50004-222]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.command.Parser.readIfDataType1(Parser.java:5866)
+	at org.h2.command.Parser.readIfDataType(Parser.java:5704)
+	at org.h2.command.Parser.parseColumnWithType(Parser.java:5686)
+	at org.h2.command.Parser.parseColumnForTable(Parser.java:5565)
+	at org.h2.command.Parser.parseTableColumnDefinition(Parser.java:8999)
+	at org.h2.command.Parser.parseCreateTable(Parser.java:8939)
+	at org.h2.command.Parser.parseCreate(Parser.java:6404)
+	at org.h2.command.Parser.parsePrepared(Parser.java:666)
+	at org.h2.command.Parser.parse(Parser.java:592)
+	at org.h2.command.Parser.parse(Parser.java:564)
+	at org.h2.command.Parser.prepareCommand(Parser.java:483)
+	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:639)
+	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:559)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1166)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:245)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:231)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1345)
+	at org.h2.server.web.WebApp.query(WebApp.java:1143)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1109)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1096)
+	at org.h2.server.web.WebThread.process(WebThread.java:190)
+	at org.h2.server.web.WebThread.run(WebThread.java:103)
+	at java.base/java.lang.Thread.run(Thread.java:1623)
+2023-09-08 16:48:03.730291-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: Tipo de dato desconocido : "SMALLMONEY"
+Unknown data type: "SMALLMONEY"; SQL statement:
+create table conbenio(
+nombre varchar(30),
+ruc varchar(11),
+tasa SMALLMONEY,
+cuenta_sueldo boolean,
+tasa_cs real,
+tasa1 real,
+tasa2 real,
+tasa3 real,
+tasa4 real,
+activo boolean
+) [50004-222]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.command.Parser.readIfDataType1(Parser.java:5866)
+	at org.h2.command.Parser.readIfDataType(Parser.java:5704)
+	at org.h2.command.Parser.parseColumnWithType(Parser.java:5686)
+	at org.h2.command.Parser.parseColumnForTable(Parser.java:5565)
+	at org.h2.command.Parser.parseTableColumnDefinition(Parser.java:8999)
+	at org.h2.command.Parser.parseCreateTable(Parser.java:8939)
+	at org.h2.command.Parser.parseCreate(Parser.java:6404)
+	at org.h2.command.Parser.parsePrepared(Parser.java:666)
+	at org.h2.command.Parser.parse(Parser.java:592)
+	at org.h2.command.Parser.parse(Parser.java:564)
+	at org.h2.command.Parser.prepareCommand(Parser.java:483)
+	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:639)
+	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:559)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1166)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:245)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:231)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1345)
+	at org.h2.server.web.WebApp.query(WebApp.java:1143)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1109)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1096)
+	at org.h2.server.web.WebThread.process(WebThread.java:190)
+	at org.h2.server.web.WebThread.run(WebThread.java:103)
+	at java.base/java.lang.Thread.run(Thread.java:1623)
+2023-09-08 16:49:16.548827-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "create table clientes(\000d\000adni varchar(8) primary key not null,\000d\000afecha_emision DATETIME,\000d\000acaracter_verificador varchar(1),\000d\000afecha_nac DATETIME,\000d\000anombre_1 varchar(30),\000d\000anombre_2 varchar(30),\000d\000aapellido_p varchar(30),\000d\000aapellido_m varchar(30),\000d\000adomicilio TEXT,\000d\000acodofin varchar(9),\000d\000aclave varchar(8)\000d\000a[*]fecha_reg DATETIME,\000d\000aconvenio varchar(30),\000d\000acuenta_sueldo boolean\000d\000a)"; se esperaba "ARRAY, INVISIBLE, VISIBLE, NOT NULL, DEFAULT, GENERATED, ON UPDATE, NOT NULL, DEFAULT ON NULL, SEQUENCE, SELECTIVITY, COMMENT, CONSTRAINT, COMMENT, PRIMARY KEY, UNIQUE, NOT NULL, CHECK, REFERENCES, ,, )"
+Syntax error in SQL statement "create table clientes(\000d\000adni varchar(8) primary key not null,\000d\000afecha_emision DATETIME,\000d\000acaracter_verificador varchar(1),\000d\000afecha_nac DATETIME,\000d\000anombre_1 varchar(30),\000d\000anombre_2 varchar(30),\000d\000aapellido_p varchar(30),\000d\000aapellido_m varchar(30),\000d\000adomicilio TEXT,\000d\000acodofin varchar(9),\000d\000aclave varchar(8)\000d\000a[*]fecha_reg DATETIME,\000d\000aconvenio varchar(30),\000d\000acuenta_sueldo boolean\000d\000a)"; expected "ARRAY, INVISIBLE, VISIBLE, NOT NULL, DEFAULT, GENERATED, ON UPDATE, NOT NULL, DEFAULT ON NULL, SEQUENCE, SELECTIVITY, COMMENT, CONSTRAINT, COMMENT, PRIMARY KEY, UNIQUE, NOT NULL, CHECK, REFERENCES, ,, )"; SQL statement:
+create table clientes(
+dni varchar(8) primary key not null,
+fecha_emision DATETIME,
+caracter_verificador varchar(1),
+fecha_nac DATETIME,
+nombre_1 varchar(30),
+nombre_2 varchar(30),
+apellido_p varchar(30),
+apellido_m varchar(30),
+domicilio TEXT,
+codofin varchar(9),
+clave varchar(8)
+fecha_reg DATETIME,
+convenio varchar(30),
+cuenta_sueldo boolean
+) [42001-222]
+2023-09-08 16:50:00.224372-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "create table clientes(\000d\000adni varchar(8) primary key not null,\000d\000afecha_emision DATE,\000d\000acaracter_verificador varchar(1),\000d\000afecha_nac DATE,\000d\000anombre_1 varchar(30),\000d\000anombre_2 varchar(30),\000d\000aapellido_p varchar(30),\000d\000aapellido_m varchar(30),\000d\000adomicilio TEXT,\000d\000acodofin varchar(9),\000d\000aclave varchar(8)\000d\000a[*]fecha_reg DATE,\000d\000aconvenio varchar(30),\000d\000acuenta_sueldo boolean\000d\000a)"; se esperaba "ARRAY, INVISIBLE, VISIBLE, NOT NULL, DEFAULT, GENERATED, ON UPDATE, NOT NULL, DEFAULT ON NULL, SEQUENCE, SELECTIVITY, COMMENT, CONSTRAINT, COMMENT, PRIMARY KEY, UNIQUE, NOT NULL, CHECK, REFERENCES, ,, )"
+Syntax error in SQL statement "create table clientes(\000d\000adni varchar(8) primary key not null,\000d\000afecha_emision DATE,\000d\000acaracter_verificador varchar(1),\000d\000afecha_nac DATE,\000d\000anombre_1 varchar(30),\000d\000anombre_2 varchar(30),\000d\000aapellido_p varchar(30),\000d\000aapellido_m varchar(30),\000d\000adomicilio TEXT,\000d\000acodofin varchar(9),\000d\000aclave varchar(8)\000d\000a[*]fecha_reg DATE,\000d\000aconvenio varchar(30),\000d\000acuenta_sueldo boolean\000d\000a)"; expected "ARRAY, INVISIBLE, VISIBLE, NOT NULL, DEFAULT, GENERATED, ON UPDATE, NOT NULL, DEFAULT ON NULL, SEQUENCE, SELECTIVITY, COMMENT, CONSTRAINT, COMMENT, PRIMARY KEY, UNIQUE, NOT NULL, CHECK, REFERENCES, ,, )"; SQL statement:
+create table clientes(
+dni varchar(8) primary key not null,
+fecha_emision DATE,
+caracter_verificador varchar(1),
+fecha_nac DATE,
+nombre_1 varchar(30),
+nombre_2 varchar(30),
+apellido_p varchar(30),
+apellido_m varchar(30),
+domicilio TEXT,
+codofin varchar(9),
+clave varchar(8)
+fecha_reg DATE,
+convenio varchar(30),
+cuenta_sueldo boolean
+) [42001-222]
+2023-09-08 17:17:10.252761-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "create table prestamo(\000d\000adni varchar(8),\000d\000aconvenio varchar(30),\000d\000atasa real,\000d\000amonto_neto real,\000d\000acuenta_sueldo boolean,\000d\000amonto_prestamo real,\000d\000acolor int,\000d\000acompra_deuda boolean,\000d\000amonto_compra real,\000d\000aproducto varchar(10),\000d\000acodigo_sup_jef_vent varchar(8),\000d\000acod_promotor varchar(8),\000d\000acanal int,\000d\000apalso int,\000d\000aemail varchar(100),\000d\000atipo_seguro int,\000d\000a[*])"; se esperaba "identifier"
+Syntax error in SQL statement "create table prestamo(\000d\000adni varchar(8),\000d\000aconvenio varchar(30),\000d\000atasa real,\000d\000amonto_neto real,\000d\000acuenta_sueldo boolean,\000d\000amonto_prestamo real,\000d\000acolor int,\000d\000acompra_deuda boolean,\000d\000amonto_compra real,\000d\000aproducto varchar(10),\000d\000acodigo_sup_jef_vent varchar(8),\000d\000acod_promotor varchar(8),\000d\000acanal int,\000d\000apalso int,\000d\000aemail varchar(100),\000d\000atipo_seguro int,\000d\000a[*])"; expected "identifier"; SQL statement:
+create table prestamo(
+dni varchar(8),
+convenio varchar(30),
+tasa real,
+monto_neto real,
+cuenta_sueldo boolean,
+monto_prestamo real,
+color int,
+compra_deuda boolean,
+monto_compra real,
+producto varchar(10),
+codigo_sup_jef_vent varchar(8),
+cod_promotor varchar(8),
+canal int,
+palso int,
+email varchar(100),
+tipo_seguro int,
+) [42001-222]
+2023-09-08 17:22:41.262479-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "create table canal(\000d\000acodigo int primary key not null,\000d\000anombre varchar(50)\000d\000a[*]descripcion text\000d\000a)"; se esperaba "ARRAY, INVISIBLE, VISIBLE, NOT NULL, DEFAULT, GENERATED, ON UPDATE, NOT NULL, DEFAULT ON NULL, SEQUENCE, SELECTIVITY, COMMENT, CONSTRAINT, COMMENT, PRIMARY KEY, UNIQUE, NOT NULL, CHECK, REFERENCES, ,, )"
+Syntax error in SQL statement "create table canal(\000d\000acodigo int primary key not null,\000d\000anombre varchar(50)\000d\000a[*]descripcion text\000d\000a)"; expected "ARRAY, INVISIBLE, VISIBLE, NOT NULL, DEFAULT, GENERATED, ON UPDATE, NOT NULL, DEFAULT ON NULL, SEQUENCE, SELECTIVITY, COMMENT, CONSTRAINT, COMMENT, PRIMARY KEY, UNIQUE, NOT NULL, CHECK, REFERENCES, ,, )"; SQL statement:
+create table canal(
+codigo int primary key not null,
+nombre varchar(50)
+descripcion text
+) [42001-222]
+2023-09-08 17:22:41.269476-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "create table seguro(\000d\000acodigo int primary key not null,\000d\000anombre varchar(50)\000d\000a[*]descripcion text\000d\000a)"; se esperaba "ARRAY, INVISIBLE, VISIBLE, NOT NULL, DEFAULT, GENERATED, ON UPDATE, NOT NULL, DEFAULT ON NULL, SEQUENCE, SELECTIVITY, COMMENT, CONSTRAINT, COMMENT, PRIMARY KEY, UNIQUE, NOT NULL, CHECK, REFERENCES, ,, )"
+Syntax error in SQL statement "create table seguro(\000d\000acodigo int primary key not null,\000d\000anombre varchar(50)\000d\000a[*]descripcion text\000d\000a)"; expected "ARRAY, INVISIBLE, VISIBLE, NOT NULL, DEFAULT, GENERATED, ON UPDATE, NOT NULL, DEFAULT ON NULL, SEQUENCE, SELECTIVITY, COMMENT, CONSTRAINT, COMMENT, PRIMARY KEY, UNIQUE, NOT NULL, CHECK, REFERENCES, ,, )"; SQL statement:
+create table seguro(
+codigo int primary key not null,
+nombre varchar(50)
+descripcion text
+) [42001-222]
+2023-09-08 18:07:52.270507-05:00 database: wrong user or password; user: "MIGUEL"
+org.h2.message.DbException: Nombre de usuario ó password incorrecto
+Wrong user name or password [28000-222]
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.message.DbException.get(DbException.java:188)
+	at org.h2.engine.Engine.openSession(Engine.java:154)
+	at org.h2.engine.Engine.openSession(Engine.java:222)
+	at org.h2.engine.Engine.createSession(Engine.java:201)
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:343)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:125)
+	at org.h2.util.JdbcUtils.getConnection(JdbcUtils.java:288)
+	at org.h2.server.web.WebServer.getConnection(WebServer.java:811)
+	at org.h2.server.web.WebApp.test(WebApp.java:978)
+	at org.h2.server.web.WebApp.process(WebApp.java:242)
+	at org.h2.server.web.WebApp.processRequest(WebApp.java:177)
+	at org.h2.server.web.WebThread.process(WebThread.java:154)
+	at org.h2.server.web.WebThread.run(WebThread.java:103)
+	at java.base/java.lang.Thread.run(Thread.java:1623)
+Caused by: org.h2.jdbc.JdbcSQLInvalidAuthorizationSpecException: Nombre de usuario ó password incorrecto
+Wrong user name or password [28000-222]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:522)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	... 16 more
+2023-09-09 12:18:30.620764-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: La cantidad de columnas no coincide
+Column count does not match; SQL statement:
+INSERT INTO producto VALUES(1, 'DXP','D POR P') [21002-222]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:514)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.message.DbException.get(DbException.java:188)
+	at org.h2.command.dml.Insert.doPrepare(Insert.java:295)
+	at org.h2.command.dml.DataChangeStatement.prepare(DataChangeStatement.java:37)
+	at org.h2.command.Parser.prepareCommand(Parser.java:489)
+	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:639)
+	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:559)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1166)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:245)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:231)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1345)
+	at org.h2.server.web.WebApp.query(WebApp.java:1143)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1109)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1096)
+	at org.h2.server.web.WebThread.process(WebThread.java:190)
+	at org.h2.server.web.WebThread.run(WebThread.java:103)
+	at java.base/java.lang.Thread.run(Thread.java:1623)
+2023-09-10 11:00:44.915507-05:00 jdbc[3]: null
+org.h2.message.DbException: La conexión no fue cerrada por la aplicación y esta siendo limpiada (garbage collected)
+The connection was not closed by the application and is garbage collected [90018-222]
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.message.DbException.get(DbException.java:188)
+	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:218)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:135)
+	at org.h2.util.JdbcUtils.getConnection(JdbcUtils.java:288)
+	at org.h2.server.web.WebServer.getConnection(WebServer.java:811)
+	at org.h2.server.web.WebApp.test(WebApp.java:978)
+	at org.h2.server.web.WebApp.process(WebApp.java:242)
+	at org.h2.server.web.WebApp.processRequest(WebApp.java:177)
+	at org.h2.server.web.WebThread.process(WebThread.java:154)
+	at org.h2.server.web.WebThread.run(WebThread.java:103)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientConnectionException: La conexión no fue cerrada por la aplicación y esta siendo limpiada (garbage collected)
+The connection was not closed by the application and is garbage collected [90018-222]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:690)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	... 13 more
