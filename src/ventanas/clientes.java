@@ -4,20 +4,21 @@
  */
 package ventanas;
 
-import java.beans.Statement;
+import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import variables.Var;
 import javax.swing.table.DefaultTableModel;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumnModel;
+
 
 /*include Var;*/
 /**
@@ -53,23 +54,23 @@ public class clientes extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        BTN_edicion = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
+        Apellido_1 = new javax.swing.JTextField();
+        Nombre_1 = new javax.swing.JTextField();
+        Nombre_2 = new javax.swing.JTextField();
+        Codofin = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        DNI = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        Apellido_2 = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        Direccion = new javax.swing.JTextField();
+        Cuenta_sueldo = new javax.swing.JCheckBox();
         jLabel11 = new javax.swing.JLabel();
         jDateChooser2 = new com.toedter.calendar.JDateChooser();
         jPanel3 = new javax.swing.JPanel();
@@ -92,6 +93,10 @@ public class clientes extends javax.swing.JInternalFrame {
         jButton6 = new javax.swing.JButton();
         jLabel15 = new javax.swing.JLabel();
         jTextField12 = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        jDateChooser3 = new com.toedter.calendar.JDateChooser();
+        jLabel17 = new javax.swing.JLabel();
+        Clave_codofin = new javax.swing.JTextField();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
 
@@ -120,47 +125,94 @@ public class clientes extends javax.swing.JInternalFrame {
         jButton2.setText("Borrar");
         jButton2.setEnabled(false);
 
-        jButton3.setText("Edicion");
+        BTN_edicion.setText("Edicion");
+        BTN_edicion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTN_edicionActionPerformed(evt);
+            }
+        });
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("[]"));
 
-        jLabel1.setText("Nombre 1");
+        jLabel1.setText("Nombre 2");
 
-        jLabel2.setText("Nombre 2");
+        jLabel2.setText("Nombre 1");
 
         jLabel3.setText("Apellido 1");
 
         jLabel4.setText("Apellido 2");
 
-        jTextField1.setText("jTextField1");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        Apellido_1.setText("Apellido_1");
+        Apellido_1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                Apellido_1FocusLost(evt);
+            }
+        });
+        Apellido_1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                Apellido_1ActionPerformed(evt);
+            }
+        });
+        Apellido_1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                Apellido_1KeyTyped(evt);
             }
         });
 
-        jTextField2.setText("jTextField1");
+        Nombre_1.setText("jTextField1");
+        Nombre_1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                Nombre_1KeyTyped(evt);
+            }
+        });
 
-        jTextField3.setText("jTextField1");
+        Nombre_2.setText("jTextField1");
+        Nombre_2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                Nombre_2KeyTyped(evt);
+            }
+        });
 
-        jTextField4.setText("jTextField1");
+        Codofin.setText("jTextField1");
+        Codofin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                CodofinKeyTyped(evt);
+            }
+        });
 
         jLabel5.setText("DNI");
 
-        jTextField5.setText("jTextField5");
+        DNI.setText("DNI");
+        DNI.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                DNIKeyTyped(evt);
+            }
+        });
 
         jLabel6.setText("Codofin");
 
-        jTextField6.setText("jTextField6");
+        Apellido_2.setText("jTextField6");
+        Apellido_2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                Apellido_2KeyTyped(evt);
+            }
+        });
 
         jLabel7.setText("Clave");
 
-        jTextField7.setText("jTextField7");
+        Direccion.setText("jTextField7");
+        Direccion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                DireccionKeyTyped(evt);
+            }
+        });
 
-        jCheckBox1.setText("Cuenta Sueldo");
-        jCheckBox1.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        Cuenta_sueldo.setText("Cuenta Sueldo");
+        Cuenta_sueldo.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
-        jLabel11.setText("Fecha de Nac");
+        jLabel11.setText("Fecha de Emis");
+
+        jDateChooser2.setDateFormatString("dd-mm-yyyy");
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("()"));
 
@@ -279,6 +331,24 @@ public class clientes extends javax.swing.JInternalFrame {
         jLabel15.setText("CAR. VER");
 
         jTextField12.setText("jTextField6");
+        jTextField12.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField12KeyTyped(evt);
+            }
+        });
+
+        jLabel16.setText("Fecha de Nac");
+
+        jDateChooser3.setDateFormatString("dd-mm-yyyy");
+
+        jLabel17.setText("Direccion ");
+
+        Clave_codofin.setText("jTextField7");
+        Clave_codofin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                Clave_codofinKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -286,53 +356,64 @@ public class clientes extends javax.swing.JInternalFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField6))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
-                            .addComponent(jTextField5)))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
                             .addComponent(jLabel7)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(12, 12, 12)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Codofin)
+                            .addComponent(Nombre_2)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(Clave_codofin, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jTextField4)
-                            .addComponent(jTextField7)
-                            .addComponent(jTextField3))))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(Nombre_1))
+                        .addGap(61, 61, 61)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                        .addComponent(jLabel11)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                                    .addComponent(Cuenta_sueldo)
                                     .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(jLabel15)
-                                        .addGap(42, 42, 42)))
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jCheckBox1)))
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                                .addComponent(jLabel15)
+                                                .addGap(42, 42, 42))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jLabel16)
+                                                .addComponent(jLabel11)))
+                                        .addGap(26, 26, 26)
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jDateChooser3, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jButton6)
+                                .addGap(75, 75, 75))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(119, 119, 119)
-                        .addComponent(jButton6)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(Apellido_2, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE))
+                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel5)
+                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(Apellido_1, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
+                                        .addComponent(DNI))))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel17)
+                                .addGap(18, 18, 18)
+                                .addComponent(Direccion)))
+                        .addGap(18, 18, 18)))
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24))
         );
@@ -344,47 +425,63 @@ public class clientes extends javax.swing.JInternalFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel5)
-                                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(DNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel11))
                             .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(9, 9, 9)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(Apellido_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel16))
+                            .addComponent(jDateChooser3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3)
+                            .addComponent(Apellido_2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4)
                             .addComponent(jLabel15)
                             .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4)
-                            .addComponent(jCheckBox1))
                         .addGap(6, 6, 6)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
+                            .addComponent(Nombre_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2)
+                            .addComponent(Cuenta_sueldo))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Nombre_2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1)
                             .addComponent(jButton6))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Codofin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
-                            .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                            .addComponent(Clave_codofin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel17)
+                            .addComponent(Direccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
         jButton4.setText("Guardar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton5.setText("Cancelar");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -401,10 +498,10 @@ public class clientes extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton3)
+                        .addComponent(BTN_edicion)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 499, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton5)
                         .addGap(163, 163, 163))))
         );
@@ -415,7 +512,7 @@ public class clientes extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2)
-                    .addComponent(jButton3)
+                    .addComponent(BTN_edicion)
                     .addComponent(jButton4)
                     .addComponent(jButton5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -449,29 +546,294 @@ public class clientes extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        limpia_inputs_cliente();
+        desctiva_inputs(true);
+        limpia_inputs_cliente();
 
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void Apellido_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Apellido_1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_Apellido_1ActionPerformed
+
+    private void Apellido_1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Apellido_1KeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if ((c < 'a' || c > 'z') && (c < 'A') | c > 'Z') {
+            evt.consume();//Solo dejo ingresar letras minúsculas y  mayusculas (no numeros ni caracteres)
+        }
+        if (Character.isLowerCase(c)) {//Todo lo que ingresa se pone em mayúscula
+            String cad = ("" + c).toUpperCase();
+            c = cad.charAt(0);
+            evt.setKeyChar(c);
+        }
+    }//GEN-LAST:event_Apellido_1KeyTyped
+
+    private void Apellido_2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Apellido_2KeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if ((c < 'a' || c > 'z') && (c < 'A') | c > 'Z') {
+            evt.consume();//Solo dejo ingresar letras minúsculas y  mayusculas (no numeros ni caracteres)
+        }
+        if (Character.isLowerCase(c)) {//Todo lo que ingresa se pone em mayúscula
+            String cad = ("" + c).toUpperCase();
+            c = cad.charAt(0);
+            evt.setKeyChar(c);
+        }
+    }//GEN-LAST:event_Apellido_2KeyTyped
+
+    private void Nombre_1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Nombre_1KeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if ((c < 'a' || c > 'z') && (c < 'A') | c > 'Z') {
+            evt.consume();//Solo dejo ingresar letras minúsculas y  mayusculas (no numeros ni caracteres)
+        }
+        if (Character.isLowerCase(c)) {//Todo lo que ingresa se pone em mayúscula
+            String cad = ("" + c).toUpperCase();
+            c = cad.charAt(0);
+            evt.setKeyChar(c);
+        }
+    }//GEN-LAST:event_Nombre_1KeyTyped
+
+    private void Nombre_2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Nombre_2KeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if ((c < 'a' || c > 'z') && (c < 'A') | c > 'Z') {
+            evt.consume();//Solo dejo ingresar letras minúsculas y  mayusculas (no numeros ni caracteres)
+        }
+        if (Character.isLowerCase(c)) {//Todo lo que ingresa se pone em mayúscula
+            String cad = ("" + c).toUpperCase();
+            c = cad.charAt(0);
+            evt.setKeyChar(c);
+        }
+        int key = evt.getKeyCode();
+        if (key == KeyEvent.VK_ENTER) {
+//        Toolkit.getDefaultToolkit().beep();
+//        System.out.println("ENTER pressed");
+            Nombre_2.setText(Nombre_2.getText().toUpperCase());
+        }
+    }//GEN-LAST:event_Nombre_2KeyTyped
+
+    private void DNIKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DNIKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if ((c < '0' || c > '9') && (c < '1') | c > '0') {
+            evt.consume();//Solo dejo ingresar letras minúsculas y  mayusculas (no numeros ni caracteres)
+        }
+        if (Character.isLowerCase(c)) {//Todo lo que ingresa se pone em mayúscula
+            String cad = ("" + c).toUpperCase();
+            c = cad.charAt(0);
+            evt.setKeyChar(c);
+
+        }
+        if (DNI.getText().length() >= 8) {
+            Toolkit.getDefaultToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_DNIKeyTyped
+
+    private void Apellido_1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Apellido_1FocusLost
+        // TODO add your handling code here:
+        Nombre_2.setText(Nombre_2.getText().toUpperCase());
+    }//GEN-LAST:event_Apellido_1FocusLost
+
+    private void CodofinKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CodofinKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if ((c < '0' || c > '9') && (c < '1') | c > '0') {
+            evt.consume();//Solo dejo ingresar letras minúsculas y  mayusculas (no numeros ni caracteres)
+        }
+        if (Character.isLowerCase(c)) {//Todo lo que ingresa se pone em mayúscula
+            String cad = ("" + c).toUpperCase();
+            c = cad.charAt(0);
+            evt.setKeyChar(c);
+
+        }
+        if (DNI.getText().length() >= 11) {
+            Toolkit.getDefaultToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_CodofinKeyTyped
+
+    private void DireccionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DireccionKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+//    if((c<'a'||c>'z')&&(c<'A')|c>'Z')evt.consume();//Solo dejo ingresar letras minúsculas y  mayusculas (no numeros ni caracteres)
+        if (Character.isLowerCase(c)) {//Todo lo que ingresa se pone em mayúscula
+            String cad = ("" + c).toUpperCase();
+            c = cad.charAt(0);
+            evt.setKeyChar(c);
+
+        }
+//    if(DNI.getText().length() >= 8)
+//    {
+//        Toolkit.getDefaultToolkit().beep();
+//        evt.consume();
+//    }
+    }//GEN-LAST:event_DireccionKeyTyped
+
+    private void jTextField12KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField12KeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if ((c < '0' || c > '9') && (c < '1') | c > '0') {
+            evt.consume();//Solo dejo ingresar letras minúsculas y  mayusculas (no numeros ni caracteres)
+        }
+        if (Character.isLowerCase(c)) {//Todo lo que ingresa se pone em mayúscula
+            String cad = ("" + c).toUpperCase();
+            c = cad.charAt(0);
+            evt.setKeyChar(c);
+
+        }
+        if (DNI.getText().length() >= 1) {
+            Toolkit.getDefaultToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextField12KeyTyped
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+//        insert  into clientes values(31651918,'2021-09-19',6,'1968-02-28','MIGUEL','DANIEL','MAZMELA','VILLANUEVA','domicilio','M','','2023-09-19','M',TRUE);
+        if (var.isEdicion()) {
+            String sql = "update clientes set fecha_emision=?,caracter_verificador=?,"
+                    + "fecha_nac=?,nombre_1=?,nombre_2=?,apellido_p=?,apellido_m=?,"
+                    + "domicilio=?,codofin=?,clave=?,fecha_reg=?,convenio=?,cuenta_sueldo=? where dni=?";
+
+            try {
+                PreparedStatement stmt = var.getCon().prepareStatement(sql);
+
+                stmt.setDate(1, var.convert(jDateChooser2.getDate()));
+                stmt.setString(2, jTextField12.getText().toUpperCase().trim());
+                stmt.setDate(3, var.convert(jDateChooser3.getDate()));
+                stmt.setString(4, Nombre_1.getText().toUpperCase().trim());
+                stmt.setString(5, Nombre_2.getText().toUpperCase().trim());
+                stmt.setString(6, Apellido_1.getText().toUpperCase().trim());
+                stmt.setString(7, Apellido_2.getText().toUpperCase().trim());
+                stmt.setString(8, Direccion.getText().toUpperCase().trim());
+                stmt.setString(9, Codofin.getText().toUpperCase().trim());
+                stmt.setString(10, Clave_codofin.getText().toUpperCase());
+                stmt.setDate(11, var.convert(jDateChooser3.getDate()));
+                stmt.setString(12, jTextField12.getText().toUpperCase().trim());
+                stmt.setBoolean(13, Cuenta_sueldo.isSelected());
+                stmt.setString(14, DNI.getText().toUpperCase().trim());
+                stmt.executeUpdate();
+                carga_tabla();
+
+            } catch (SQLException ex) {
+                Logger.getLogger(clientes.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        } else {
+            String sql = "insert  into clientes values(?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+            try {
+                PreparedStatement stmt = var.getCon().prepareStatement(sql);
+                stmt.setString(1, DNI.getText().toUpperCase().trim());
+                stmt.setDate(2, var.convert(jDateChooser2.getDate()));
+                stmt.setString(3, jTextField12.getText().toUpperCase().trim());
+                stmt.setDate(4, var.convert(jDateChooser3.getDate()));
+                stmt.setString(5, Nombre_1.getText().toUpperCase().trim());
+                stmt.setString(6, Nombre_2.getText().toUpperCase().trim());
+                stmt.setString(7, Apellido_1.getText().toUpperCase().trim());
+                stmt.setString(8, Apellido_2.getText().toUpperCase().trim());
+                stmt.setString(9, Direccion.getText().toUpperCase().trim());
+                stmt.setString(10, Codofin.getText().toUpperCase().trim());
+                stmt.setString(11, Clave_codofin.getText().toUpperCase());
+                stmt.setDate(12, var.convert(jDateChooser3.getDate()));
+                stmt.setString(13, jTextField12.getText().toUpperCase().trim());
+                stmt.setBoolean(14, Cuenta_sueldo.isSelected());
+                stmt.executeUpdate();
+                carga_tabla();
+
+            } catch (SQLException ex) {
+                Logger.getLogger(clientes.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        var.setEdicion(false);
+        desctiva_inputs(false);
+        limpia_inputs_cliente();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void Clave_codofinKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Clave_codofinKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if ((c < '0' || c > '9') && (c < '1') | c > '0') {
+            evt.consume();//Solo dejo ingresar letras minúsculas y  mayusculas (no numeros ni caracteres)
+        }
+        if (Character.isLowerCase(c)) {//Todo lo que ingresa se pone em mayúscula
+            String cad = ("" + c).toUpperCase();
+            c = cad.charAt(0);
+            evt.setKeyChar(c);
+
+        }
+        if (DNI.getText().length() >= 8) {
+            Toolkit.getDefaultToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_Clave_codofinKeyTyped
+
+    private void BTN_edicionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_edicionActionPerformed
+        // TODO add your handling code here:
+        int fila = jTable1.getSelectedRow();
+        String dato = jTable1.getValueAt(fila, 0).toString();
+        String sql = "select *"
+                + "from clientes "
+                + "where dni='" + dato + "'";
+        desctiva_inputs(true);
+        try {
+            PreparedStatement ps = var.conectar().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            DNI.setText(rs.getNString("dni"));
+            Apellido_1.setText(rs.getNString("apellido_p"));
+            Apellido_2.setText(rs.getNString("apellido_m"));
+            Nombre_1.setText(rs.getNString("nombre_1"));
+            Nombre_2.setText(rs.getNString("nombre_2"));
+            Codofin.setText(rs.getNString("codofin"));
+            Clave_codofin.setText(rs.getNString("clave"));
+            Direccion.setText(rs.getNString("domicilio"));
+            jTextField12.setText(rs.getNString("convenio"));
+            Cuenta_sueldo.setSelected(rs.getBoolean("cuenta_sueldo"));
+            jDateChooser2.setDate(var.FechaSqlUtil(rs.getDate("fecha_emision")));
+            jDateChooser3.setDate(var.FechaSqlUtil(rs.getDate("fecha_nac")));
+            var.setEdicion(true);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(clientes.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
+    }//GEN-LAST:event_BTN_edicionActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        desctiva_inputs(false);
+        limpia_inputs_cliente();
+    }//GEN-LAST:event_jButton5ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField Apellido_1;
+    private javax.swing.JTextField Apellido_2;
+    private javax.swing.JButton BTN_edicion;
+    private javax.swing.JTextField Clave_codofin;
+    private javax.swing.JTextField Codofin;
+    private javax.swing.JCheckBox Cuenta_sueldo;
+    private javax.swing.JTextField DNI;
+    private javax.swing.JTextField Direccion;
+    private javax.swing.JTextField Nombre_1;
+    private javax.swing.JTextField Nombre_2;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
-    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JComboBox<String> jComboBox1;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private com.toedter.calendar.JDateChooser jDateChooser2;
+    private com.toedter.calendar.JDateChooser jDateChooser3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -479,6 +841,8 @@ public class clientes extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -493,16 +857,9 @@ public class clientes extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField11;
     private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
     // End of variables declaration//GEN-END:variables
@@ -510,10 +867,14 @@ public class clientes extends javax.swing.JInternalFrame {
     private void inicia_todo() {
 //        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
         String x[][] = {};
-        String colu[] = {"DNI", "APELLIDO PAT", "APELLIDO MAT",  "NOMRE 1", "NOMRE 2","FEC_NAC", "CONVENIO"};
+        String colu[] = {"DNI", "APELLIDO PAT", "APELLIDO MAT", "NOMRE 1", "NOMRE 2", "FEC_NAC", "CONVENIO"};
         DefaultTableModel model;
         model = (DefaultTableModel) jTable1.getModel();
         model.setColumnIdentifiers(colu);
+        jDateChooser2.setDateFormatString("dd-MM-yyyy");
+        jDateChooser2.setDate(Date.valueOf(LocalDate.now()));
+        jDateChooser3.setDateFormatString("dd-MM-yyyy");
+        jDateChooser3.setDate(Date.valueOf(LocalDate.now()));
 
         DefaultTableCellRenderer tcr;
         TableColumnModel columnModel = jTable1.getColumnModel();
@@ -533,22 +894,15 @@ public class clientes extends javax.swing.JInternalFrame {
 //        jTable1.setModel(model);
 
         jTable1.setModel(model);
+        desctiva_inputs(false);
         carga_tabla();
-        jTextField5.setText("");
-        jTextField1.setText("");
-        jTextField2.setText("");
-        jTextField3.setText("");
-        jTextField4.setText("");
-        jTextField5.setText("");
-        jTextField6.setText("");
-        jTextField7.setText("");
-        jTextField8.setText("");
-        jTextField12.setText("");
+        limpia_inputs_cliente();
+
         carga_tabla();
 
     }
 
-     private void carga_tabla() {
+    private void carga_tabla() {
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
         var.borratabla(modelo);
@@ -556,7 +910,7 @@ public class clientes extends javax.swing.JInternalFrame {
         //select * from creditos where dia_de_operacion ='2020-10-08' and CPROVEEDOR='00000018 MOLITALIA S.A.' and MONTH(dfecha_documento)='10' and year(dfecha_documento)='2020'
 //        int mesnum=jMonthChooser1.getMonth()+1;
 //        int añonum=jYearChooser1.getValue();
-        String sql="select DNI,FECHA_EMISION, CARACTER_VERIFICADOR,FECHA_NAC,NOMBRE_1,NOMBRE_2, APELLIDO_P, APELLIDO_M,DOMICILIO,CODOFIN,CLAVE from clientes";
+        String sql = "select DNI,FECHA_EMISION, CARACTER_VERIFICADOR,FECHA_NAC,NOMBRE_1,NOMBRE_2, APELLIDO_P, APELLIDO_M,DOMICILIO,CODOFIN,CLAVE from clientes";
 //                + "from creditos Left Outer Join EXTENCION "
 //                + "using (CNUMERO) "
 //                + "where dia_de_operacion='"+v.carga_ultima_fecha_Texto()+"'"
@@ -572,23 +926,51 @@ public class clientes extends javax.swing.JInternalFrame {
                 fila[1] = rs.getNString("apellido_p");
                 fila[2] = rs.getNString("apellido_m");
                 fila[3] = rs.getNString("NOMBRE_1");
-                fila[4] = rs.getNString("NOMBRE_1");
-                fila[5] = rs.getNString("FECHA_NAC");
+                fila[4] = rs.getNString("NOMBRE_2");
+                fila[5] = var.deFechaSqlATexto(rs.getDate("FECHA_NAC"));
 //                fila[4] = rs.getNString("nimporte_neto");
 //                fila[5] = formatea.format(rs.getDouble("nmonto"));
 //                fila[5] = rs.getNString("EXTENCION.RESPONSABLE");
 //                fila[7] = rs.getNString("EXTENCION.COMENTARIO");
-                
-                
+
                 modelo.addRow(fila);
             }
             jTable1.setModel(modelo);
-            
-            
-            
+
         } catch (SQLException ex) {
 //            Logger.getLogger(Creditosxmes.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println(ex);
         }
+    }
+
+    private void limpia_inputs_cliente() {
+//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        DNI.setText("");
+        Apellido_1.setText("");
+        Nombre_1.setText("");
+        Nombre_2.setText("");
+        Codofin.setText("");
+//        DNI.setText("");
+        Apellido_2.setText("");
+        Direccion.setText("");
+        jTextField8.setText("");
+        jTextField12.setText("");
+        Clave_codofin.setText("");
+    }
+
+    private void desctiva_inputs(Boolean act) {
+//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        DNI.setEditable(act);
+        Apellido_1.setEditable(act);
+        Nombre_1.setEditable(act);
+        Nombre_2.setEditable(act);
+        Codofin.setEditable(act);
+//        DNI.setText("");
+        Apellido_2.setEditable(act);
+        Direccion.setEditable(act);
+        jTextField8.setEditable(act);
+//        jTextField12.setText("");
+        Clave_codofin.setEditable(act);
+        jTextField12.setEditable(act);
     }
 }

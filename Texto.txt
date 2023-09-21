@@ -1,0 +1,1 @@
+insert  into clientes values(31651918,'2021-09-19',6,'1968-02-28','MIGUEL','DANIEL','MAZMELA','VILLANUEVA','domicilio','M','','2023-09-19','M',TRUE);
