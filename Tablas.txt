@@ -1,18 +1,18 @@
 create table clientes(
-dni varchar(8) primary key not null,
-fecha_emision DATE,
-caracter_verificador varchar(1),
-fecha_nac DATE,
-nombre_1 varchar(30),
-nombre_2 varchar(30),
-apellido_p varchar(30),
-apellido_m varchar(30),
-domicilio TEXT,
-codofin varchar(9),
-clave varchar(8),
-fecha_reg DATE,
-convenio varchar(30),
-cuenta_sueldo boolean
+1 dni varchar(8) primary key not null,
+2 fecha_emision DATE,
+3 caracter_verificador varchar(1),
+4 fecha_nac DATE,
+5 nombre_1 varchar(30),
+6 nombre_2 varchar(30),
+7 apellido_p varchar(30),
+8 apellido_m varchar(30),
+9 domicilio TEXT,
+0 codofin varchar(9),
+1 clave varchar(8),
+2 fecha_reg DATE,
+3 convenio varchar(30),
+4 cuenta_sueldo boolean
 );
 
 create table conbenio(
@@ -38,7 +38,7 @@ monto_prestamo real,
 color int,
 compra_deuda boolean,
 monto_compra real,
-producto varchar(10),
+producto varchar(10),																								
 codigo_sup_jef_vent varchar(8),
 cod_promotor varchar(8),
 canal int,
@@ -74,6 +74,12 @@ create table seguro(
 codigo int primary key not null,
 nombre varchar(50),
 descripcion text
+);
+
+create table telefonos(
+Dni varchar(8),
+pais varchar(3),
+telefono varchar(13)
 );
 
 INSERT INTO producto VALUES(1, 'DXP','D POR P');

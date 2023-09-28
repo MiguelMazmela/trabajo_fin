@@ -1,4 +1,6 @@
 /nbproject/private/
 /build/
-
+data/
 adjuntos/
+data/clientes.mv.db
+*.db

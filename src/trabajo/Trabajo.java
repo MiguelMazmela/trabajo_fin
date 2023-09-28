@@ -4,6 +4,7 @@
  */
 package trabajo;
 
+import javax.swing.JFrame;
 import variables.Var;
 import ventanas.prueba;
 
@@ -25,7 +26,12 @@ public class Trabajo {
         System.out.println("Path : "+v.getCaminoCompletoBD());
         System.out.println("conectado : "+v.isConectado());
         prueba p=new prueba(v);
+        p.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+        p.setTitle("Principal");
+        p.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        p.setLocationRelativeTo(null);
         p.setVisible(true);
+        
     
     }
     
