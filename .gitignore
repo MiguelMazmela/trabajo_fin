@@ -4,6 +4,4 @@ data/
 adjuntos/
 data/clientes.mv.db
 *.db
-adjuntos
-adjuntos
-adjuntos
+/dist/

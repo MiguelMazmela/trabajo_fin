@@ -4,6 +4,20 @@
  */
 package ventanas;
 
+import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JTable;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 import variables.Var;
 
 /**
@@ -12,7 +26,7 @@ import variables.Var;
  */
 public class Convenios extends javax.swing.JInternalFrame {
 
-    private final Var v;
+    private final Var var;
 
     /**
      * Creates new form Convenios
@@ -20,7 +34,7 @@ public class Convenios extends javax.swing.JInternalFrame {
      */
     public Convenios(Var v) {
         initComponents();
-        this.v = v;
+        this.var = v;
         inicia();
     }
 
@@ -75,6 +89,11 @@ public class Convenios extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -99,23 +118,63 @@ public class Convenios extends javax.swing.JInternalFrame {
         jLabel8.setText("RUC");
 
         jTextField1.setText("jTextField1");
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField1KeyTyped(evt);
+            }
+        });
 
         jTextField2.setText("jTextField1");
+        jTextField2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField2KeyTyped(evt);
+            }
+        });
 
         jTextField3.setText("jTextField1");
+        jTextField3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField3KeyTyped(evt);
+            }
+        });
 
         jTextField5.setText("jTextField1");
+        jTextField5.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField5KeyTyped(evt);
+            }
+        });
 
         jTextField6.setText("jTextField1");
+        jTextField6.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField6KeyTyped(evt);
+            }
+        });
 
         jTextField7.setText("jTextField1");
+        jTextField7.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField7KeyTyped(evt);
+            }
+        });
 
         jTextField8.setText("jTextField1");
+        jTextField8.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField8KeyTyped(evt);
+            }
+        });
 
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel9.setText("TASA 4");
 
         jTextField9.setText("jTextField1");
+        jTextField9.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField9KeyTyped(evt);
+            }
+        });
 
         jButton1.setText("Nuevo");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -125,6 +184,11 @@ public class Convenios extends javax.swing.JInternalFrame {
         });
 
         jButton2.setText("Guardar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Editar");
 
@@ -313,6 +377,175 @@ public class Convenios extends javax.swing.JInternalFrame {
        Activa_todo(false);
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        jButton3.setEnabled(true);
+        jButton5.setEnabled(true);
+        
+        
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+                if (var.isEdicion()) {
+            String sql = "update conbenio set nombre=?,tasa=?,"
+                    + "cuenta_sueldo=?,tasa_cs=?,tasa1=?,tasa2=?,tasa3=?,"
+                    + "tasa4=?,activo=? where ruc=?";
+
+            try {
+                PreparedStatement stmt = var.getCon().prepareStatement(sql);
+
+                stmt.setString(1, jTextField1.getText().toUpperCase().trim());
+                stmt.setFloat(2,Float.parseFloat(jTextField3.getText().toUpperCase().trim()));
+                stmt.setBoolean(3, jCheckBox2.isSelected());
+                stmt.setFloat(4,var.DeTextoAFloat(jTextField5.getText().toUpperCase().trim()));
+                stmt.setFloat(5,var.DeTextoAFloat(jTextField6.getText().toUpperCase().trim()));
+                stmt.setFloat(6,var.DeTextoAFloat(jTextField7.getText().toUpperCase().trim()));
+                stmt.setFloat(7,var.DeTextoAFloat(jTextField8.getText().toUpperCase().trim()));
+                stmt.setFloat(8,var.DeTextoAFloat(jTextField9.getText().toUpperCase().trim()));
+                stmt.setBoolean(9, jCheckBox1.isSelected());
+                stmt.setString(10, jTextField2.getText().toUpperCase().trim());
+
+                stmt.executeUpdate();
+                carga_tabla();
+
+            } catch (SQLException ex) {
+                Logger.getLogger(clientes.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        } else {
+            String sql = "insert  into conbenio values(?,?,?,?,?,?,?,?,?,?);";
+            try {
+                PreparedStatement stmt = var.getCon().prepareStatement(sql);
+                stmt.setString(1, jTextField1.getText().toUpperCase().trim());
+                stmt.setString(2, jTextField2.getText().toUpperCase().trim());
+                stmt.setFloat(3,Float.parseFloat(jTextField3.getText().toUpperCase().trim()));
+                stmt.setBoolean(4, jCheckBox2.isSelected());
+                stmt.setFloat(5,var.DeTextoAFloat(jTextField5.getText().toUpperCase().trim()));
+                stmt.setFloat(6,var.DeTextoAFloat(jTextField6.getText().toUpperCase().trim()));
+                stmt.setFloat(7,var.DeTextoAFloat(jTextField7.getText().toUpperCase().trim()));
+                stmt.setFloat(8,var.DeTextoAFloat(jTextField8.getText().toUpperCase().trim()));
+                stmt.setFloat(9,var.DeTextoAFloat(jTextField9.getText().toUpperCase().trim()));
+                stmt.setBoolean(10, jCheckBox1.isSelected());
+                
+                stmt.executeUpdate();
+                carga_tabla();
+
+            } catch (SQLException ex) {
+                Logger.getLogger(clientes.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        var.setEdicion(false);
+           limpia_ingresos(); 
+       Activa_todo(false);
+//        desctiva_inputs(false);
+//        limpia_inputs_cliente();
+
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jTextField2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyTyped
+        // TODO add your handling code here:
+                char c = evt.getKeyChar();
+        if ((c < '0' || c > '9') && (c < '1') | c > '0') {
+            evt.consume();//Solo dejo ingresar letras minúsculas y  mayusculas (no numeros ni caracteres)
+        }
+        if (Character.isLowerCase(c)) {//Todo lo que ingresa se pone em mayúscula
+            String cad = ("" + c).toUpperCase();
+            c = cad.charAt(0);
+            evt.setKeyChar(c);
+
+        }
+        if (jTextField2.getText().length() >= 11) {
+            Toolkit.getDefaultToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextField2KeyTyped
+
+    private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
+        // TODO add your handling code here:
+                char c = evt.getKeyChar();
+        if ((c < 'a' || c > 'z') && (c < 'A') | c > 'Z') {
+            evt.consume();//Solo dejo ingresar letras minúsculas y  mayusculas (no numeros ni caracteres)
+        }
+        if (Character.isLowerCase(c)) {//Todo lo que ingresa se pone em mayúscula
+            String cad = ("" + c).toUpperCase();
+            c = cad.charAt(0);
+            evt.setKeyChar(c);
+        }
+        int key = evt.getKeyCode();
+        if (key == KeyEvent.VK_ENTER) {
+//        Toolkit.getDefaultToolkit().beep();
+//        System.out.println("ENTER pressed");
+            jTextField1.setText(jTextField1.getText().toUpperCase());
+        }
+    }//GEN-LAST:event_jTextField1KeyTyped
+
+    private void jTextField3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyTyped
+        // TODO add your handling code here:
+           char []p={'1','2','3','4','5','6','7','8','9','0','.'};
+    int b=0;
+    for(int i=0;i<=10;i++){
+    if (p[i]==evt.getKeyChar()){b=1;}
+ 
+    }
+    if(b==0){evt.consume();  getToolkit().beep(); }
+    }//GEN-LAST:event_jTextField3KeyTyped
+
+    private void jTextField5KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField5KeyTyped
+        // TODO add your handling code here:
+           char []p={'1','2','3','4','5','6','7','8','9','0','.'};
+    int b=0;
+    for(int i=0;i<=10;i++){
+    if (p[i]==evt.getKeyChar()){b=1;}
+ 
+    }
+    if(b==0){evt.consume();  getToolkit().beep(); }
+    }//GEN-LAST:event_jTextField5KeyTyped
+
+    private void jTextField6KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField6KeyTyped
+        // TODO add your handling code here:
+           char []p={'1','2','3','4','5','6','7','8','9','0','.'};
+    int b=0;
+    for(int i=0;i<=10;i++){
+    if (p[i]==evt.getKeyChar()){b=1;}
+ 
+    }
+    if(b==0){evt.consume();  getToolkit().beep(); }
+    }//GEN-LAST:event_jTextField6KeyTyped
+
+    private void jTextField7KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField7KeyTyped
+        // TODO add your handling code here:
+           char []p={'1','2','3','4','5','6','7','8','9','0','.'};
+    int b=0;
+    for(int i=0;i<=10;i++){
+    if (p[i]==evt.getKeyChar()){b=1;}
+ 
+    }
+    if(b==0){evt.consume();  getToolkit().beep(); }
+    }//GEN-LAST:event_jTextField7KeyTyped
+
+    private void jTextField8KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField8KeyTyped
+        // TODO add your handling code here:
+           char []p={'1','2','3','4','5','6','7','8','9','0','.'};
+    int b=0;
+    for(int i=0;i<=10;i++){
+    if (p[i]==evt.getKeyChar()){b=1;}
+ 
+    }
+    if(b==0){evt.consume();  getToolkit().beep(); }
+    }//GEN-LAST:event_jTextField8KeyTyped
+
+    private void jTextField9KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField9KeyTyped
+        // TODO add your handling code here:
+           char []p={'1','2','3','4','5','6','7','8','9','0','.'};
+    int b=0;
+    for(int i=0;i<=10;i++){
+    if (p[i]==evt.getKeyChar()){b=1;}
+ 
+    }
+    if(b==0){evt.consume();  getToolkit().beep(); }
+    }//GEN-LAST:event_jTextField9KeyTyped
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel TASA;
@@ -349,7 +582,8 @@ public class Convenios extends javax.swing.JInternalFrame {
 //        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
        limpia_ingresos(); 
        Activa_todo(false);
-        
+       inicia_tabla_clientes();
+        carga_tabla();
     }
 
     private void limpia_ingresos() {
@@ -385,5 +619,83 @@ public class Convenios extends javax.swing.JInternalFrame {
         jCheckBox1.setEnabled(b);
         
         
+    }
+
+    private void carga_tabla() {
+//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+                DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        var.borratabla(modelo);
+//        String selecion=jComboBox1.getSelectedItem().toString();
+        //select * from creditos where dia_de_operacion ='2020-10-08' and CPROVEEDOR='00000018 MOLITALIA S.A.' and MONTH(dfecha_documento)='10' and year(dfecha_documento)='2020'
+//        int mesnum=jMonthChooser1.getMonth()+1;
+//        int añonum=jYearChooser1.getValue();
+        String sql = "select * from conbenio";
+//                + "from creditos Left Outer Join EXTENCION "
+//                + "using (CNUMERO) "
+//                + "where dia_de_operacion='"+v.carga_ultima_fecha_Texto()+"'"
+//                + "order by dfecha_documento,cid_clie";
+        Object[] fila = new Object[7]; // Hay tres columnas en la tabla6
+//        DecimalFormat formatea = v.MyFormatter();
+//        SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd/MM/aaaa");
+        try {
+            PreparedStatement ps = var.conectar().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                fila[0] = rs.getNString("nombre");
+                fila[1] = rs.getNString("ruc");
+                fila[2] = rs.getFloat("tasa");
+                fila[3] = rs.getBoolean("cuenta_sueldo");
+                fila[4] = rs.getFloat("tasa_cs");
+                fila[5] = rs.getFloat("tasa1");
+                fila[6] = rs.getBoolean("activo");
+                
+//                fila[4] = rs.getNString("nimporte_neto");
+//                fila[5] = formatea.format(rs.getDouble("nmonto"));
+//                fila[5] = rs.getNString("EXTENCION.RESPONSABLE");
+//                fila[7] = rs.getNString("EXTENCION.COMENTARIO");
+
+                modelo.addRow(fila);
+            }
+            jTable1.setModel(modelo);
+
+        } catch (SQLException ex) {
+//            Logger.getLogger(Creditosxmes.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
+        }
+        
+    }
+    private void inicia_tabla_clientes() {
+//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+
+        String x[][] = {};
+        String colu[] = {"NOMBRE", "RUC", "TASA", "CUENT.SUELD", "TASA CUENT.SUELD", "TASA", "ACTIVO"};
+        DefaultTableModel model;
+        jTable1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        model = (DefaultTableModel) jTable1.getModel();
+        model.setColumnIdentifiers(colu);
+//        jDateChooser2.setDateFormatString("dd-MM-yyyy");
+//        jDateChooser2.setDate(Date.valueOf(LocalDate.now()));
+//        jDateChooser3.setDateFormatString("dd-MM-yyyy");
+//        jDateChooser3.setDate(Date.valueOf(LocalDate.now()));
+
+        DefaultTableCellRenderer tcr;
+        TableColumnModel columnModel = jTable1.getColumnModel();
+        columnModel.getColumn(0).setPreferredWidth(50);
+        columnModel.getColumn(1).setPreferredWidth(100);
+        columnModel.getColumn(2).setPreferredWidth(75);
+        columnModel.getColumn(3).setPreferredWidth(75);
+        columnModel.getColumn(4).setPreferredWidth(75);
+//        columnModel.getColumn(5).setPreferredWidth(75);
+//        columnModel.getColumn(6).setPreferredWidth(75);
+        tcr = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(SwingConstants.RIGHT); //CENTER o LEFT
+//        jTable1.getColumnModel().getColumn(3).setCellRenderer(tcr);
+//        jTable1.getColumnModel().getColumn(4).setCellRenderer(tcr);
+        jTable1.getColumnModel().getColumn(5).setCellRenderer(tcr);
+//        jTable1.getColumnModel().getColumn(6).setCellRenderer(tcr);
+//        jTable1.setModel(model);
+        var.borratabla(model);
+        jTable1.setModel(model);
+
     }
 }

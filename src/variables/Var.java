@@ -174,5 +174,18 @@ public class Var {
     public void setEdicion(boolean edicion) {
         this.edicion = edicion;
     }
+    public float DeTextoAFloat(String tex){
+        float numero=(float) 0.00;
+         try {
+            float f = Float.parseFloat(tex);
+            numero=f;
+//            System.out.println(f);                // 1.1
+        } catch (NumberFormatException e) {
+            // la string no se puede analizar para que flote
+        }
+        
+        
+        return numero;
+    }
 
 }
