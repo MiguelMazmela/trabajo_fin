@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -387,6 +388,7 @@ public class Convenios extends javax.swing.JInternalFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        
                 if (var.isEdicion()) {
             String sql = "update conbenio set nombre=?,tasa=?,"
                     + "cuenta_sueldo=?,tasa_cs=?,tasa1=?,tasa2=?,tasa3=?,"
@@ -396,7 +398,7 @@ public class Convenios extends javax.swing.JInternalFrame {
                 PreparedStatement stmt = var.getCon().prepareStatement(sql);
 
                 stmt.setString(1, jTextField1.getText().toUpperCase().trim());
-                stmt.setFloat(2,Float.parseFloat(jTextField3.getText().toUpperCase().trim()));
+                stmt.setFloat(2,var.DeTextoAFloat(jTextField3.getText().toUpperCase().trim()));
                 stmt.setBoolean(3, jCheckBox2.isSelected());
                 stmt.setFloat(4,var.DeTextoAFloat(jTextField5.getText().toUpperCase().trim()));
                 stmt.setFloat(5,var.DeTextoAFloat(jTextField6.getText().toUpperCase().trim()));
@@ -414,12 +416,28 @@ public class Convenios extends javax.swing.JInternalFrame {
             }
 
         } else {
+                    String sqlc = "select * from conbenio where ruc='"+jTextField2.getText().toUpperCase().trim()+"'";
+//                    PreparedStatement stmtc;
+                    try {
+                        PreparedStatement ps = var.conectar().prepareStatement(sqlc);
+//                        stmtc.setString(1, jTextField2.getText().toUpperCase().trim());
+                        ResultSet rs = ps.executeQuery();
+                        rs.next();
+                        if(!rs.isBeforeFirst()){
+                            JOptionPane.showMessageDialog(null, "RUC Existe");
+                            return;
+                        }
+                    } catch (SQLException ex) {
+                        Logger.getLogger(Convenios.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
+                    
             String sql = "insert  into conbenio values(?,?,?,?,?,?,?,?,?,?);";
             try {
                 PreparedStatement stmt = var.getCon().prepareStatement(sql);
                 stmt.setString(1, jTextField1.getText().toUpperCase().trim());
                 stmt.setString(2, jTextField2.getText().toUpperCase().trim());
-                stmt.setFloat(3,Float.parseFloat(jTextField3.getText().toUpperCase().trim()));
+                stmt.setFloat(3,var.DeTextoAFloat(jTextField3.getText().toUpperCase().trim()));
                 stmt.setBoolean(4, jCheckBox2.isSelected());
                 stmt.setFloat(5,var.DeTextoAFloat(jTextField5.getText().toUpperCase().trim()));
                 stmt.setFloat(6,var.DeTextoAFloat(jTextField6.getText().toUpperCase().trim()));
