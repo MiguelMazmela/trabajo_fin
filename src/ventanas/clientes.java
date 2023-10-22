@@ -13,6 +13,8 @@ import javax.swing.table.DefaultTableModel;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
@@ -118,7 +120,6 @@ public class clientes extends javax.swing.JInternalFrame {
         jTextField15 = new javax.swing.JTextField();
         jComboBox2 = new javax.swing.JComboBox<>();
         jTextField16 = new javax.swing.JTextField();
-        jComboBox3 = new javax.swing.JComboBox<>();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         jTextField17 = new javax.swing.JTextField();
@@ -165,6 +166,11 @@ public class clientes extends javax.swing.JInternalFrame {
 
         jButton2.setText("Borrar");
         jButton2.setEnabled(false);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         BTN_edicion.setText("Edicion");
         BTN_edicion.addActionListener(new java.awt.event.ActionListener() {
@@ -272,6 +278,7 @@ public class clientes extends javax.swing.JInternalFrame {
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Telefonos"));
 
+        jList1.setFont(new java.awt.Font("Noto Sans", 0, 18)); // NOI18N
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
@@ -503,7 +510,13 @@ public class clientes extends javax.swing.JInternalFrame {
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        jTextField11.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         jTextField11.setText("jTextField8");
+        jTextField11.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField11KeyTyped(evt);
+            }
+        });
 
         jTextField8.setText("jTextField8");
 
@@ -528,6 +541,11 @@ public class clientes extends javax.swing.JInternalFrame {
         });
 
         jButton7.setText("Guardar");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         jButton8.setText("Cancelar");
         jButton8.addActionListener(new java.awt.event.ActionListener() {
@@ -574,25 +592,41 @@ public class clientes extends javax.swing.JInternalFrame {
 
         jLabel19.setText("monto sol");
 
+        jTextField13.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         jTextField13.setText("jTextField8");
+        jTextField13.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField13KeyTyped(evt);
+            }
+        });
 
         jLabel20.setText("Plazo");
 
         jLabel21.setText("compra de d");
 
+        jTextField15.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         jTextField15.setText("jTextField8");
+        jTextField15.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField15KeyTyped(evt);
+            }
+        });
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        jTextField16.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         jTextField16.setText("jTextField8");
-
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jTextField16.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField16KeyTyped(evt);
+            }
+        });
 
         jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel22.setText("Seguro");
 
         jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel23.setText("Correo");
+        jLabel23.setText("Deuda");
 
         jTextField17.setText("jTextField8");
 
@@ -603,7 +637,6 @@ public class clientes extends javax.swing.JInternalFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
@@ -640,14 +673,11 @@ public class clientes extends javax.swing.JInternalFrame {
                                         .addComponent(jTextField16)
                                         .addComponent(jTextField17, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -658,8 +688,6 @@ public class clientes extends javax.swing.JInternalFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(47, 47, 47)
-                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -708,7 +736,7 @@ public class clientes extends javax.swing.JInternalFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel22)
                             .addComponent(jTextField17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 9, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -1063,6 +1091,7 @@ public class clientes extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         int fila = jTable1.getSelectedRow();
         if (fila == -1) {
+            
             return;
         }
         String dato = jTable1.getValueAt(fila, 0).toString();
@@ -1077,6 +1106,26 @@ public class clientes extends javax.swing.JInternalFrame {
         jButton8.setEnabled(true);
         jButton9.setEnabled(true);
         Resultados.setEnabled(true);
+        jComboBox1.removeAllItems();
+        jTextField16.setEditable(true);
+        jTextField16.setText("");
+        jButton6.setEnabled(false);
+        jButton9.setEnabled(false);
+        
+        
+        String sql="select * "
+                + "from conbenio ";
+        try {
+            PreparedStatement ps = var.conectar().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                jComboBox1.addItem(rs.getNString("nombre")); 
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(clientes.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Calendar micalendario = new GregorianCalendar();
+        jDateChooser1.setCalendar(micalendario);
 
         System.out.println(dato);
     }//GEN-LAST:event_jButton6ActionPerformed
@@ -1088,6 +1137,81 @@ public class clientes extends javax.swing.JInternalFrame {
 
 
     }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jTextField11KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField11KeyTyped
+        // TODO add your handling code here:
+               char[] p = {'1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '.'};
+        int b = 0;
+        for (int i = 0; i <= 10; i++) {
+            if (p[i] == evt.getKeyChar()) {
+                b = 1;
+            }
+
+        }
+        if (b == 0) {
+            evt.consume();
+            getToolkit().beep();
+        }
+    }//GEN-LAST:event_jTextField11KeyTyped
+
+    private void jTextField13KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField13KeyTyped
+        // TODO add your handling code here:
+               char[] p = {'1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '.'};
+        int b = 0;
+        for (int i = 0; i <= 10; i++) {
+            if (p[i] == evt.getKeyChar()) {
+                b = 1;
+            }
+
+        }
+        if (b == 0) {
+            evt.consume();
+            getToolkit().beep();
+        }
+    }//GEN-LAST:event_jTextField13KeyTyped
+
+    private void jTextField16KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField16KeyTyped
+        // TODO add your handling code here:
+               char[] p = {'1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '.'};
+        int b = 0;
+        for (int i = 0; i <= 10; i++) {
+            if (p[i] == evt.getKeyChar()) {
+                b = 1;
+            }
+
+        }
+        if (b == 0) {
+            evt.consume();
+            getToolkit().beep();
+        }
+    }//GEN-LAST:event_jTextField16KeyTyped
+
+    private void jTextField15KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField15KeyTyped
+        // TODO add your handling code here:
+               char c = evt.getKeyChar();
+        if ((c < '0' || c > '9') && (c < '1') | c > '0') {
+            evt.consume();//Solo dejo ingresar letras minúsculas y  mayusculas (no numeros ni caracteres)
+        }
+        if (Character.isLowerCase(c)) {//Todo lo que ingresa se pone em mayúscula
+            String cad = ("" + c).toUpperCase();
+            c = cad.charAt(0);
+            evt.setKeyChar(c);
+
+        }
+//        if (DNI.getText().length() >= 3) {
+//            Toolkit.getDefaultToolkit().beep();
+//            evt.consume();
+//        }
+    }//GEN-LAST:event_jTextField15KeyTyped
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jButton7ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1114,7 +1238,6 @@ public class clientes extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton9;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private com.toedter.calendar.JDateChooser jDateChooser2;
     private com.toedter.calendar.JDateChooser jDateChooser3;

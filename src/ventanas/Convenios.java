@@ -31,6 +31,7 @@ public class Convenios extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form Convenios
+     *
      * @param v
      */
     public Convenios(Var v) {
@@ -192,6 +193,11 @@ public class Convenios extends javax.swing.JInternalFrame {
         });
 
         jButton3.setText("Editar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Cancel");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -201,6 +207,11 @@ public class Convenios extends javax.swing.JInternalFrame {
         });
 
         jButton5.setText("Borrar");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -338,7 +349,7 @@ public class Convenios extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -370,26 +381,27 @@ public class Convenios extends javax.swing.JInternalFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         Activa_todo(true);
+        jCheckBox1.setSelected(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        limpia_ingresos(); 
-       Activa_todo(false);
+        limpia_ingresos();
+        Activa_todo(false);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
         jButton3.setEnabled(true);
         jButton5.setEnabled(true);
-        
-        
+
+
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        
-                if (var.isEdicion()) {
+
+        if (var.isEdicion()) {
             String sql = "update conbenio set nombre=?,tasa=?,"
                     + "cuenta_sueldo=?,tasa_cs=?,tasa1=?,tasa2=?,tasa3=?,"
                     + "tasa4=?,activo=? where ruc=?";
@@ -398,13 +410,13 @@ public class Convenios extends javax.swing.JInternalFrame {
                 PreparedStatement stmt = var.getCon().prepareStatement(sql);
 
                 stmt.setString(1, jTextField1.getText().toUpperCase().trim());
-                stmt.setFloat(2,var.DeTextoAFloat(jTextField3.getText().toUpperCase().trim()));
+                stmt.setFloat(2, var.DeTextoAFloat(jTextField3.getText().toUpperCase().trim()));
                 stmt.setBoolean(3, jCheckBox2.isSelected());
-                stmt.setFloat(4,var.DeTextoAFloat(jTextField5.getText().toUpperCase().trim()));
-                stmt.setFloat(5,var.DeTextoAFloat(jTextField6.getText().toUpperCase().trim()));
-                stmt.setFloat(6,var.DeTextoAFloat(jTextField7.getText().toUpperCase().trim()));
-                stmt.setFloat(7,var.DeTextoAFloat(jTextField8.getText().toUpperCase().trim()));
-                stmt.setFloat(8,var.DeTextoAFloat(jTextField9.getText().toUpperCase().trim()));
+                stmt.setFloat(4, var.DeTextoAFloat(jTextField5.getText().toUpperCase().trim()));
+                stmt.setFloat(5, var.DeTextoAFloat(jTextField6.getText().toUpperCase().trim()));
+                stmt.setFloat(6, var.DeTextoAFloat(jTextField7.getText().toUpperCase().trim()));
+                stmt.setFloat(7, var.DeTextoAFloat(jTextField8.getText().toUpperCase().trim()));
+                stmt.setFloat(8, var.DeTextoAFloat(jTextField9.getText().toUpperCase().trim()));
                 stmt.setBoolean(9, jCheckBox1.isSelected());
                 stmt.setString(10, jTextField2.getText().toUpperCase().trim());
 
@@ -416,36 +428,35 @@ public class Convenios extends javax.swing.JInternalFrame {
             }
 
         } else {
-                    String sqlc = "select * from conbenio where ruc='"+jTextField2.getText().toUpperCase().trim()+"'";
+            String sqlc = "select * from conbenio where ruc='" + jTextField2.getText().toUpperCase().trim() + "'";
 //                    PreparedStatement stmtc;
-                    try {
-                        PreparedStatement ps = var.conectar().prepareStatement(sqlc);
+            try {
+                PreparedStatement ps = var.conectar().prepareStatement(sqlc);
 //                        stmtc.setString(1, jTextField2.getText().toUpperCase().trim());
-                        ResultSet rs = ps.executeQuery();
-                        rs.next();
-                        if(!rs.isBeforeFirst()){
-                            JOptionPane.showMessageDialog(null, "RUC Existe");
-                            return;
-                        }
-                    } catch (SQLException ex) {
-                        Logger.getLogger(Convenios.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    
-                    
+                ResultSet rs = ps.executeQuery();
+                rs.next();
+                if (rs.getString("ruc").equals(jTextField2.getText().toUpperCase().trim())) {
+                    JOptionPane.showMessageDialog(null, "RUC Existe");
+                    return;
+                }
+            } catch (SQLException ex) {
+//                        Logger.getLogger(Convenios.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
             String sql = "insert  into conbenio values(?,?,?,?,?,?,?,?,?,?);";
             try {
                 PreparedStatement stmt = var.getCon().prepareStatement(sql);
                 stmt.setString(1, jTextField1.getText().toUpperCase().trim());
                 stmt.setString(2, jTextField2.getText().toUpperCase().trim());
-                stmt.setFloat(3,var.DeTextoAFloat(jTextField3.getText().toUpperCase().trim()));
+                stmt.setFloat(3, var.DeTextoAFloat(jTextField3.getText().toUpperCase().trim()));
                 stmt.setBoolean(4, jCheckBox2.isSelected());
-                stmt.setFloat(5,var.DeTextoAFloat(jTextField5.getText().toUpperCase().trim()));
-                stmt.setFloat(6,var.DeTextoAFloat(jTextField6.getText().toUpperCase().trim()));
-                stmt.setFloat(7,var.DeTextoAFloat(jTextField7.getText().toUpperCase().trim()));
-                stmt.setFloat(8,var.DeTextoAFloat(jTextField8.getText().toUpperCase().trim()));
-                stmt.setFloat(9,var.DeTextoAFloat(jTextField9.getText().toUpperCase().trim()));
+                stmt.setFloat(5, var.DeTextoAFloat(jTextField5.getText().toUpperCase().trim()));
+                stmt.setFloat(6, var.DeTextoAFloat(jTextField6.getText().toUpperCase().trim()));
+                stmt.setFloat(7, var.DeTextoAFloat(jTextField7.getText().toUpperCase().trim()));
+                stmt.setFloat(8, var.DeTextoAFloat(jTextField8.getText().toUpperCase().trim()));
+                stmt.setFloat(9, var.DeTextoAFloat(jTextField9.getText().toUpperCase().trim()));
                 stmt.setBoolean(10, jCheckBox1.isSelected());
-                
+
                 stmt.executeUpdate();
                 carga_tabla();
 
@@ -454,8 +465,8 @@ public class Convenios extends javax.swing.JInternalFrame {
             }
         }
         var.setEdicion(false);
-           limpia_ingresos(); 
-       Activa_todo(false);
+        limpia_ingresos();
+        Activa_todo(false);
 //        desctiva_inputs(false);
 //        limpia_inputs_cliente();
 
@@ -463,7 +474,7 @@ public class Convenios extends javax.swing.JInternalFrame {
 
     private void jTextField2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyTyped
         // TODO add your handling code here:
-                char c = evt.getKeyChar();
+        char c = evt.getKeyChar();
         if ((c < '0' || c > '9') && (c < '1') | c > '0') {
             evt.consume();//Solo dejo ingresar letras minúsculas y  mayusculas (no numeros ni caracteres)
         }
@@ -481,7 +492,7 @@ public class Convenios extends javax.swing.JInternalFrame {
 
     private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
         // TODO add your handling code here:
-                char c = evt.getKeyChar();
+        char c = evt.getKeyChar();
         if ((c < 'a' || c > 'z') && (c < 'A') | c > 'Z') {
             evt.consume();//Solo dejo ingresar letras minúsculas y  mayusculas (no numeros ni caracteres)
         }
@@ -500,69 +511,166 @@ public class Convenios extends javax.swing.JInternalFrame {
 
     private void jTextField3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyTyped
         // TODO add your handling code here:
-           char []p={'1','2','3','4','5','6','7','8','9','0','.'};
-    int b=0;
-    for(int i=0;i<=10;i++){
-    if (p[i]==evt.getKeyChar()){b=1;}
- 
-    }
-    if(b==0){evt.consume();  getToolkit().beep(); }
+        char[] p = {'1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '.'};
+        int b = 0;
+        for (int i = 0; i <= 10; i++) {
+            if (p[i] == evt.getKeyChar()) {
+                b = 1;
+            }
+
+        }
+        if (b == 0) {
+            evt.consume();
+            getToolkit().beep();
+        }
     }//GEN-LAST:event_jTextField3KeyTyped
 
     private void jTextField5KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField5KeyTyped
         // TODO add your handling code here:
-           char []p={'1','2','3','4','5','6','7','8','9','0','.'};
-    int b=0;
-    for(int i=0;i<=10;i++){
-    if (p[i]==evt.getKeyChar()){b=1;}
- 
-    }
-    if(b==0){evt.consume();  getToolkit().beep(); }
+        char[] p = {'1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '.'};
+        int b = 0;
+        for (int i = 0; i <= 10; i++) {
+            if (p[i] == evt.getKeyChar()) {
+                b = 1;
+            }
+
+        }
+        if (b == 0) {
+            evt.consume();
+            getToolkit().beep();
+        }
     }//GEN-LAST:event_jTextField5KeyTyped
 
     private void jTextField6KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField6KeyTyped
         // TODO add your handling code here:
-           char []p={'1','2','3','4','5','6','7','8','9','0','.'};
-    int b=0;
-    for(int i=0;i<=10;i++){
-    if (p[i]==evt.getKeyChar()){b=1;}
- 
-    }
-    if(b==0){evt.consume();  getToolkit().beep(); }
+        char[] p = {'1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '.'};
+        int b = 0;
+        for (int i = 0; i <= 10; i++) {
+            if (p[i] == evt.getKeyChar()) {
+                b = 1;
+            }
+
+        }
+        if (b == 0) {
+            evt.consume();
+            getToolkit().beep();
+        }
     }//GEN-LAST:event_jTextField6KeyTyped
 
     private void jTextField7KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField7KeyTyped
         // TODO add your handling code here:
-           char []p={'1','2','3','4','5','6','7','8','9','0','.'};
-    int b=0;
-    for(int i=0;i<=10;i++){
-    if (p[i]==evt.getKeyChar()){b=1;}
- 
-    }
-    if(b==0){evt.consume();  getToolkit().beep(); }
+        char[] p = {'1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '.'};
+        int b = 0;
+        for (int i = 0; i <= 10; i++) {
+            if (p[i] == evt.getKeyChar()) {
+                b = 1;
+            }
+
+        }
+        if (b == 0) {
+            evt.consume();
+            getToolkit().beep();
+        }
     }//GEN-LAST:event_jTextField7KeyTyped
 
     private void jTextField8KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField8KeyTyped
         // TODO add your handling code here:
-           char []p={'1','2','3','4','5','6','7','8','9','0','.'};
-    int b=0;
-    for(int i=0;i<=10;i++){
-    if (p[i]==evt.getKeyChar()){b=1;}
- 
-    }
-    if(b==0){evt.consume();  getToolkit().beep(); }
+        char[] p = {'1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '.'};
+        int b = 0;
+        for (int i = 0; i <= 10; i++) {
+            if (p[i] == evt.getKeyChar()) {
+                b = 1;
+            }
+
+        }
+        if (b == 0) {
+            evt.consume();
+            getToolkit().beep();
+        }
     }//GEN-LAST:event_jTextField8KeyTyped
 
     private void jTextField9KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField9KeyTyped
         // TODO add your handling code here:
-           char []p={'1','2','3','4','5','6','7','8','9','0','.'};
-    int b=0;
-    for(int i=0;i<=10;i++){
-    if (p[i]==evt.getKeyChar()){b=1;}
- 
-    }
-    if(b==0){evt.consume();  getToolkit().beep(); }
+        char[] p = {'1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '.'};
+        int b = 0;
+        for (int i = 0; i <= 10; i++) {
+            if (p[i] == evt.getKeyChar()) {
+                b = 1;
+            }
+
+        }
+        if (b == 0) {
+            evt.consume();
+            getToolkit().beep();
+        }
     }//GEN-LAST:event_jTextField9KeyTyped
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:..................
+        int fila = jTable1.getSelectedRow();
+        if (fila < 0) {
+            return;
+        }
+
+        String dato = jTable1.getValueAt(fila, 1).toString().trim();
+        String sql = "DELETE FROM conbenio "
+                + "WHERE ruc = '" + dato + "'";
+        int resp = JOptionPane.showConfirmDialog(null, "Vas a eliminar el conveno " + dato,
+                "ATENCION", JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.INFORMATION_MESSAGE);
+        if (resp != 0) {
+            return;
+        }
+
+        try {
+            PreparedStatement st = var.getCon().prepareStatement(sql);
+            st.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(Convenios.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        carga_tabla();
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        activa_campos(true);
+        jTextField2.setEditable(false);
+        var.setEdicion(true);
+        jCheckBox1.setEnabled(true);
+        int fila = jTable1.getSelectedRow();
+        if (fila < 0) {
+            return;
+        }
+        activa_botones(true);
+
+        String dato = jTable1.getValueAt(fila, 1).toString().trim();
+        String sql = "select * from conbenio where ruc='"+dato+"'";
+        PreparedStatement ps;
+        try {
+            ps = var.conectar().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            jTextField1.setText(rs.getNString("nombre"));
+            jTextField2.setText(rs.getNString("ruc"));
+            jTextField3.setText(rs.getNString("tasa"));
+            jTextField5.setText(rs.getNString("tasa_cs"));
+            jTextField6.setText(rs.getNString("tasa1"));
+            jTextField7.setText(rs.getNString("tasa2"));
+            jTextField8.setText(rs.getNString("tasa3"));
+            jTextField9.setText(rs.getNString("tasa4"));
+            jCheckBox2.setSelected(rs.getBoolean("cuenta_sueldo"));
+            jCheckBox1.setSelected(rs.getBoolean("activo"));
+            
+            
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Convenios.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+        
+
+    }//GEN-LAST:event_jButton3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -598,9 +706,9 @@ public class Convenios extends javax.swing.JInternalFrame {
 
     private void inicia() {
 //        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-       limpia_ingresos(); 
-       Activa_todo(false);
-       inicia_tabla_clientes();
+        limpia_ingresos();
+        Activa_todo(false);
+        inicia_tabla_clientes();
         carga_tabla();
     }
 
@@ -614,34 +722,20 @@ public class Convenios extends javax.swing.JInternalFrame {
         jTextField7.setText("");
         jTextField8.setText("");
         jTextField9.setText("");
-        
-           
+
     }
 
     private void Activa_todo(boolean b) {
 //        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-        jTextField1.setEditable(b);
-        jTextField2.setEditable(b);
-        jTextField3.setEditable(b);
-        jTextField5.setEditable(b);
-        jTextField6.setEditable(b);
-        jTextField7.setEditable(b);
-        jTextField8.setEditable(b);
-        jTextField9.setEditable(b);
-        jButton1.setEnabled(!b);
-        jButton2.setEnabled(b);
-        jButton3.setEnabled(false);
-        jButton4.setEnabled(b);
-        jButton5.setEnabled(false);
-        jCheckBox2.setEnabled(b);
-        jCheckBox1.setEnabled(b);
+        activa_campos(b);
+        activa_botones(b);
         
-        
+
     }
 
     private void carga_tabla() {
 //        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-                DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
         var.borratabla(modelo);
 //        String selecion=jComboBox1.getSelectedItem().toString();
         //select * from creditos where dia_de_operacion ='2020-10-08' and CPROVEEDOR='00000018 MOLITALIA S.A.' and MONTH(dfecha_documento)='10' and year(dfecha_documento)='2020'
@@ -666,12 +760,11 @@ public class Convenios extends javax.swing.JInternalFrame {
                 fila[4] = rs.getFloat("tasa_cs");
                 fila[5] = rs.getFloat("tasa1");
                 fila[6] = rs.getBoolean("activo");
-                
+
 //                fila[4] = rs.getNString("nimporte_neto");
 //                fila[5] = formatea.format(rs.getDouble("nmonto"));
 //                fila[5] = rs.getNString("EXTENCION.RESPONSABLE");
 //                fila[7] = rs.getNString("EXTENCION.COMENTARIO");
-
                 modelo.addRow(fila);
             }
             jTable1.setModel(modelo);
@@ -680,8 +773,9 @@ public class Convenios extends javax.swing.JInternalFrame {
 //            Logger.getLogger(Creditosxmes.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println(ex);
         }
-        
+
     }
+
     private void inicia_tabla_clientes() {
 //        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
 
@@ -698,7 +792,7 @@ public class Convenios extends javax.swing.JInternalFrame {
 
         DefaultTableCellRenderer tcr;
         TableColumnModel columnModel = jTable1.getColumnModel();
-        columnModel.getColumn(0).setPreferredWidth(50);
+        columnModel.getColumn(0).setPreferredWidth(80);
         columnModel.getColumn(1).setPreferredWidth(100);
         columnModel.getColumn(2).setPreferredWidth(75);
         columnModel.getColumn(3).setPreferredWidth(75);
@@ -707,13 +801,40 @@ public class Convenios extends javax.swing.JInternalFrame {
 //        columnModel.getColumn(6).setPreferredWidth(75);
         tcr = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.RIGHT); //CENTER o LEFT
-//        jTable1.getColumnModel().getColumn(3).setCellRenderer(tcr);
-//        jTable1.getColumnModel().getColumn(4).setCellRenderer(tcr);
+        jTable1.getColumnModel().getColumn(2).setCellRenderer(tcr);
+        jTable1.getColumnModel().getColumn(4).setCellRenderer(tcr);
         jTable1.getColumnModel().getColumn(5).setCellRenderer(tcr);
 //        jTable1.getColumnModel().getColumn(6).setCellRenderer(tcr);
 //        jTable1.setModel(model);
         var.borratabla(model);
         jTable1.setModel(model);
 
+    }
+
+    private void activa_campos(boolean b) {
+//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        jTextField1.setEditable(b);
+        jTextField2.setEditable(b);
+        jTextField3.setEditable(b);
+        jTextField5.setEditable(b);
+        jTextField6.setEditable(b);
+        jTextField7.setEditable(b);
+        jTextField8.setEditable(b);
+        jTextField9.setEditable(b);
+        
+        
+    }
+
+    private void activa_botones(boolean b) {
+//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        jButton1.setEnabled(!b);
+        jButton2.setEnabled(b);
+        jButton3.setEnabled(false);
+        jButton4.setEnabled(b);
+        jButton5.setEnabled(false);
+        jCheckBox2.setEnabled(b);
+        jCheckBox1.setEnabled(b);
+        
+        
     }
 }

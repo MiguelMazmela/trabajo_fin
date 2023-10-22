@@ -13,6 +13,7 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -140,6 +141,11 @@ public class Var {
         df.setDecimalFormatSymbols(otherSymbols);
         return df;
 
+    }
+    
+    public java.util.Date fecha(){
+        
+        return new Date();
     }
 
     public String deFechaSqlATexto(java.sql.Date fecha) {
